@@ -16,7 +16,7 @@
          (into explored neighbors)
          (into (pop frontier) (remove explored neighbors)))))))
 
-(defn seq-graph-dfs [g s]
+(defn _seq-graph-dfs [g s]
   ((fn rec-dfs [explored frontier]
      (lazy-seq
       (if (empty? frontier)
@@ -28,7 +28,7 @@
                    (into (pop frontier) (remove explored neighbors))))))))
    #{s} [s]))
 
-(defn seq-graph-bfs [g s]
+(defn _seq-graph-bfs [g s]
   ((fn rec-bfs [explored frontier]
      (lazy-seq
       (if (empty? frontier)
@@ -40,17 +40,9 @@
                    (into (pop frontier) (remove explored neighbors))))))))
    #{s} (conj (clojure.lang.PersistentQueue/EMPTY) s)))
 
-
-(comment
-  (traverse-graph-dfs G :1) ; => [:1 :3 :4 :2]
-  (seq-graph-dfs G :1) ; => (:1 :3 :4 :2)
-  (seq-graph-bfs G :1) ; => (:1 :2 :3 :4)
-  ,)
-;
-
 (defn seq-graph [d g s]
   ((fn rec-seq [explored frontier]
-     (lazy-seq
+    (lazy-seq
       (if (empty? frontier)
         nil
         (let [v (peek frontier)
@@ -60,9 +52,14 @@
                    (into (pop frontier) (remove explored neighbors))))))))
    #{s} (conj d s)))
 
+(def seq-graph-dfs (partial seq-graph []))
+(def seq-graph-bfs (partial seq-graph (clojure.lang.PersistentQueue/EMPTY)))
+
 (comment
-  (def seq-graph-dfs (partial seq-graph []))
-  (def seq-graph-bfs (partial seq-graph (clojure.lang.PersistentQueue/EMPTY)))
+
+  (traverse-graph-dfs G :1) ; => [:1 :3 :4 :2]
+  (_seq-graph-dfs G :1) ; => (:1 :3 :4 :2)
+  (_seq-graph-bfs G :1) ; => (:1 :2 :3 :4)
 
   (seq-graph-dfs G :1) ; => (:1 :3 :4 :2)
   (seq-graph-bfs G :1) ; => (:1 :2 :3 :4)
