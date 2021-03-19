@@ -2,17 +2,17 @@
   (:require
     [clojure.tools.namespace.repl :as tnr]
     ;[criterium.core :refer [quick-bench]]
-    [mount.core :as mount]))
+    ;[mount.core :as mount]))
     ;[hashp.core]
     ;    
-    ;[_____.main  :refer [-main]]))
+    [gt.main  :refer [-main]]))
 ;=
 
-;(-main)
+(-main)
 
-(defn restart []
-  (mount/stop)
-  (mount/start))
+(defn restart [])
+  ;; (mount/stop)
+  ;; (mount/start))
 
 (defn reset []
   (tnr/refresh :after 'user/restart))
@@ -22,8 +22,8 @@
 
 ;  (try (restart) (catch Exception _ _))
 
-  (mount/start)
-  (mount/stop)
+  ;; (mount/start)
+  ;; (mount/stop)
   (restart)
   (reset)
 

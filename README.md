@@ -1,5 +1,8 @@
 # Graph Traversal
 
+```bash
+clj -M:dev:nrepl
+```
 
 ## misc
 
