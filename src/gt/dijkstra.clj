@@ -8,7 +8,7 @@
 
 (def ^:private Inf (Long/MAX_VALUE))
 
-(defn make-path [prev-map v]
+(defn make-path [prev-map v]    ;; !!! not lazy !!!
   (when v
     (cons v (make-path prev-map (get prev-map v)))))
 ;;
