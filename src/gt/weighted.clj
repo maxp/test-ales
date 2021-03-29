@@ -1,12 +1,15 @@
 (ns gt.weighted)
 
+;; (def G {:1 [:2 :3]
+;;         :2 [:4]
+;;         :3 [:4]
+;;         :4 []})
 
-(def G {:1 [:2 :3]
-        :2 [:4]
-        :3 [:4]
-        :4 []})
 
-
+; GRAPH structure
+; map of:
+;   Vertice -> List of (Vertice, Weight)
+; 
 (def WG '{:1 [(:2 1) (:3 2)]
           :2 [(:4 4)]
           :3 [(:4 2)]
